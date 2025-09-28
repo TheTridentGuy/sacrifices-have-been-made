@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commitment simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<img src="assets/nonfc.jpg" alt="" id="no-nfc">
+<script>
+    const game = new URLSearchParams(window.location.search).get("game")
+    console.log(game)
+
+    const video_paths = {
+        "codm": [
+            ["assets/codm-rare-0.mp4"],
+            ["assets/codm-rare-0.mp4"],
+            ["assets/codm-rare-0.mp4"],
+        ]
+    }
+
+    function dopamine(rarity){
+        console.assert(game in video_paths, "No videos for this game!")
+        console.assert(0 <= rarity <= 2, "Invalid rarity!")
+        let game_video_paths = video_paths[game]
+        let rarity_game_video_paths = game_video_paths[rarity]
+        let video_path = rarity_game_video_paths[Math.random() * rarity_game_video_paths.length]
+    }
+</script>
+</body>
+</html>

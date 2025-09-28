@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yes, we know it's a commitment, not an addiction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="flex-col">
+        <div class="flex-row">
+            <div class="flex-grow"></div>
+            <h1>Select the game you're addicted to:</h1>
+            <div class="flex-grow"></div>
+        </div>
+        <div class="flex-row">
+            <div class="flex-grow"></div>
+            <a href="dopamine.html?game=genshin">
+                <img src="assets/genshin.png" alt="" class="game-img">
+            </a>
+            <div class="flex-grow"></div>
+        </div>
+        <div class="flex-row">
+            <div class="flex-grow"></div>
+            <a href="dopamine.html?game=codm">
+                <img src="assets/codm.png" alt="" class="game-img">
+            </a>
+            <div class="flex-grow"></div>
+        </div>
+        <div class="flex-row">
+            <div class="flex-grow"></div>
+            <a href="dopamine.html?game=cs2">
+                <img src="assets/cs2.png" alt="" class="game-img">
+            </a>
+            <div class="flex-grow"></div>
+        </div>
+        <div class="flex-row">
+            <div class="flex-grow"></div>
+            <audio src="assets/clicker.mp3" id="clicker"></audio>
+            <span class="fake-link" onclick="document.getElementById('clicker').play()">im a dog</span>
+            <div class="flex-grow"></div>
+        </div>
+    </div>
+    <div id="pleeb-div" class="flex-col" style="display: none">
+        <div class="flex-grow"></div>
+        <div class="text-align-center">
+            Hello, you are a loser who isn't using Chrome on Android. As such, you will be given a button to click to get your dopamine hits.
+        </div>
+        <div class="flex-grow"></div>
+    </div>
+    <script>
+        function $(query){
+            return document.querySelector(query)
+        }
+        if(!"NDEFReader" in window){
+            console.log("nuhuh")
+            $("#pleeb-div").style.display = "block";
+        }
+    </script>
+</body>
+</html>
