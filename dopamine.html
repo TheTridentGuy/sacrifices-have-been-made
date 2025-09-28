@@ -7,26 +7,51 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<img src="assets/nonfc.jpg" alt="" id="no-nfc">
-<script>
-    const game = new URLSearchParams(window.location.search).get("game")
-    console.log(game)
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+    <img src="https://ipv4.games/claim?name=plscuddle.me" alt="" style="display: none">
+    <img src="assets/nonfc.jpg" alt="" id="no-nfc" onclick="dopamine(Math.floor(Math.random()*3))">
+    <button onclick="if(document.fullscreenElement){document.exitFullscreen()}else{document.body.requestFullscreen()}">Fullscreen</button>
+    <button onclick="start_nfc()" id="start-nfc">start NFC</button>
+    <video src="" id="dopamine"></video>
+    <script>
+        function $(query){
+            return document.querySelector(query)
+        }
 
-    const video_paths = {
-        "codm": [
-            ["assets/codm-rare-0.mp4"],
-            ["assets/codm-rare-0.mp4"],
-            ["assets/codm-rare-0.mp4"],
-        ]
-    }
+        const game = new URLSearchParams(window.location.search).get("game")
+        console.log(game)
 
-    function dopamine(rarity){
-        console.assert(game in video_paths, "No videos for this game!")
-        console.assert(0 <= rarity <= 2, "Invalid rarity!")
-        let game_video_paths = video_paths[game]
-        let rarity_game_video_paths = game_video_paths[rarity]
-        let video_path = rarity_game_video_paths[Math.random() * rarity_game_video_paths.length]
-    }
-</script>
+        const video_paths = {
+            "codm": [
+                ["assets/codm-rare-0.mp4"],
+                ["assets/codm-rare-0.mp4"],
+                ["assets/codm-rare-0.mp4"],
+            ]
+        }
+
+        function dopamine(rarity){
+            console.assert(game in video_paths, "No videos for this game!")
+            console.assert(0 <= rarity <= 2, "Invalid rarity!")
+            let game_video_paths = video_paths[game]
+            let rarity_game_video_paths = game_video_paths[rarity]
+            let video_path = rarity_game_video_paths[Math.floor(Math.random() * rarity_game_video_paths.length)]
+            video_element = $("#dopamine")
+            video_element.src = video_path
+            video_element.play()
+        }
+        function start_nfc(){
+            const ndef = new window.NDEFReader()
+            let decoder = new TextDecoder()
+            ndef.scan()
+            $("#start-nfc").style.display = "none";
+            ndef.addEventListener("reading", ({message}) => {
+                let rarity = decoder.decode(message.records[0].data)
+                console.log(rarity)
+                dopamine(parseInt(rarity))
+            })
+        }
+        start_nfc()
+    </script>
 </body>
 </html>
